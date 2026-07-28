@@ -30,6 +30,7 @@ def main():
                 number_of_person: int = int(input('Please enter the number of person sharing >> '))
             except ValueError as e:
                 print(f'Error: {e}')
+                print(f'Please enter a valid float/int value, ex - 12.5, 10, etc')
             else:
                 currency: str = input('Please enter the currency code >> ').upper()
                 calculate_split(total_amount, currency, number_of_person) 
@@ -39,6 +40,7 @@ def main():
                 total_amount = float(input('Please enter the total amount to be splitted >> '))
             except ValueError as e:
                 print(f'Error: {e}')
+                print(f'Please enter a valid float/int value, ex - 12.5, 10, etc')
                 continue
 
             currency = input('Please enter the currency code >> ').upper()
@@ -56,10 +58,10 @@ def main():
 
                 add_share_holder = input('Press Y to add another share holder >> ').upper()
 
-            if share_holders:
-                calculate_split(total_amount, currency, share=share_holders)
-            else:
-                print('No share-holders provided; nothing to calculate.')
+                if share_holders:
+                    calculate_split(total_amount, currency, share=share_holders)
+                else:
+                    print('No share-holders provided; nothing to calculate.')
         
 
 
