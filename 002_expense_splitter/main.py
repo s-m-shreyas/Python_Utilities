@@ -5,7 +5,6 @@ def calculate_split(total_amount: float,
                     number_of_person: int|None = None,
                     share: dict[str, float]|None = None)->None:
 
-    
     if share is None:
         if number_of_person is None or number_of_person < 1:
                 raise ValueError("Number of people must be greater than one.")
@@ -20,8 +19,7 @@ def calculate_split(total_amount: float,
             share_amount = total_amount*share_val
             print(f'{name} has a share amount of {share_amount:,.02f}')
 
-def main():
-    
+def main()->None:
     while True:
         share: str = input('Please press Y if you have to split percent wise >> ').upper()
         if share != 'Y':
@@ -62,10 +60,7 @@ def main():
                     calculate_split(total_amount, currency, share=share_holders)
                 else:
                     print('No share-holders provided; nothing to calculate.')
-        
 
-
-          
 
 if __name__ == "__main__":
     main()
