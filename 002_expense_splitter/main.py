@@ -15,7 +15,6 @@ def calculate_split(total_amount: float,
     currency: str,
     number_of_person: int|None = None,
     share: dict[str, float]|None = None
-    
     """
 
     if share is None:
