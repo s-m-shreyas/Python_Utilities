@@ -1,9 +1,22 @@
-# This functions calculates the split amount, as per the share.
+# 1. This functions calculates the split amount, as per the share.
 
 def calculate_split(total_amount: float,
                     currency: str,
                     number_of_person: int|None = None,
                     share: dict[str, float]|None = None)->None:
+
+    """
+    This function intends to calculate the share of each share holders
+    for any given amount.
+    
+    It takes following arguments:
+
+    total_amount: float,
+    currency: str,
+    number_of_person: int|None = None,
+    share: dict[str, float]|None = None
+    
+    """
 
     if share is None:
         if number_of_person is None or number_of_person < 1:
@@ -18,6 +31,9 @@ def calculate_split(total_amount: float,
             share_val = share_percent/100
             share_amount = total_amount*share_val
             print(f'{name} has a share amount of {share_amount:,.02f}')
+
+
+# 2. This is main entry point of the script.
 
 def main()->None:
     while True:
@@ -61,6 +77,8 @@ def main()->None:
                 else:
                     print('No share-holders provided; nothing to calculate.')
 
+
+# 3. Runs the script
 
 if __name__ == "__main__":
     main()
