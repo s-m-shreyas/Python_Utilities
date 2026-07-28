@@ -75,7 +75,9 @@ def calculate_finances(monthly_income: float,
             print("Warning: your expenses are greater than your monthly net income.")
     print(f"{'-'*30}")
 
+
 # 5.The main entry point of the script, which gathers the required info.
+
 def main():
     while True:
         try:
@@ -107,6 +109,8 @@ def main():
 
     calculate_finances(monthly_income, tax_rate_in_percent, currency_code, expenses)
 
+
 # 6. Runs the script.
+
 if __name__ == "__main__":
     main()
