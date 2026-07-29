@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog
-
+from pathlib import Path
 
 # 1. Creating a Notepad class, Inherits directly from tk.Tk.
 
@@ -39,7 +39,27 @@ class SimpleNotepad(tk.Tk):
         #                                         command=self.update_file)
         # self.update_button.pack(side=tk.BOTTOM)
 
-        self.current_file_path: str|None = None
+        # Autosave setup
+        self.current_file_path: str | None = None
+        self.autosave_dir = Path.home() / ".simple_notepad"
+        self.autosave_path = self.autosave_dir / "autosave.txt"
+        self.autosave_dir.mkdir(parents=True, exist_ok=True)
+
+        # Load autosave on startup (recover unsaved work)
+        if self.autosave_path.exists():
+            try:
+                content = self.autosave_path.read_text(encoding='utf-8')
+                if content.strip():
+                    self.text_area.insert(1.0, content)
+            except Exception:
+                pass
+
+        # Auto-save loop
+        self.auto_save_interval_ms = 100  # 0.1 seconds
+        self.auto_save_job: str | None = None
+        self.schedule_auto_save()
+
+        # self.current_file_path: str|None = None
 
 
     # 7. Creating a function to save the content
@@ -84,6 +104,32 @@ class SimpleNotepad(tk.Tk):
 
         self.current_file_path = file_path
         print(f'File loaded from: {file_path}')
+
+    # ---------- Auto-save ----------
+
+    def schedule_auto_save(self) -> None:
+        if self.auto_save_job is not None:
+            self.after_cancel(self.auto_save_job)
+        self.auto_save_job = self.after(self.auto_save_interval_ms, self.auto_save_tick)
+
+    def auto_save_tick(self) -> None:
+        content = self.text_area.get(1.0, tk.END)
+
+        # Always write to autosave file (covers new/unsaved docs)
+        try:
+            self.autosave_path.write_text(content, encoding='utf-8')
+        except Exception:
+            pass
+
+        # If we have a real file, also save there
+        if self.current_file_path is not None:
+            try:
+                with open(self.current_file_path, 'w', encoding='utf-8') as file:
+                    file.write(content)
+            except Exception:
+                pass
+
+        self.schedule_auto_save()
 
 
 # 9. Main entry point of the script.
