@@ -77,7 +77,6 @@ class SimpleNotepad(tk.Tk):
         with open(self.current_file_path, 'w') as file:
             file.write(self.text_area.get(1.0, tk.END))
 
-        
         print(f'File saved to: {self.current_file_path}')
 
 
