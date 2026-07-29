@@ -35,12 +35,11 @@ def web_status_check(url: str)->None:
 
 # A function to read the file containing URLs.
 
-def load_url(file_path: str)->str:
+def load_url(file_path: str)->list[str]:
 
     with open(file_path, 'r') as file:
-
         contents = file.read()
-        re_content_list: list = re.findall(r"https?://[^\s]+", contents)
+        re_content_list: list[str] = re.findall(r"https?://[^\s]+", contents)
         return re_content_list
 
 
@@ -48,10 +47,9 @@ def load_url(file_path: str)->str:
 
 def main() -> None:
     file_path: str = input(fr'Please provide the file path containing URLs >>').strip('"')
-    url_list_to_check: str = load_url(file_path)
+    url_list_to_check: list[str] = load_url(file_path)
     for url in url_list_to_check:
         web_status_check(url)
-
 
 # Run the script
 
