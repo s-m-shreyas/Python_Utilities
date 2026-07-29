@@ -32,13 +32,45 @@ class SimpleNotepad(tk.Tk):
         self.load_button.pack(side=tk.RIGHT)
 
 
+        # if you want a separate update button
+
+        # self.update_button: tk.Button = tk.Button(self.button_frame,
+        #                                         text='Update',
+        #                                         command=self.update_file)
+        # self.update_button.pack(side=tk.BOTTOM)
+
+        self.current_file_path: str|None = None
+
+
     # 7. Creating a function to save the content
     def save_file(self)->None:
-        file_path: str = filedialog.asksaveasfilename(defaultextension='.txt',
-                                                      filetypes=[('Text files', '*.txt')])
-        with open(file_path, 'w') as file:
+
+        if self.current_file_path is None:
+            file_path: str = filedialog.asksaveasfilename(defaultextension='.txt',
+                                                            filetypes=[('Text files', '*.txt')])
+            with open(file_path, 'w') as file:
+                file.write(self.text_area.get(1.0, tk.END))
+
+            self.current_file_path = file_path
+            print(f'File saved to: {file_path}')
+
+        with open(self.current_file_path, 'w') as file:
             file.write(self.text_area.get(1.0, tk.END))
-        print(f'File saved to: {file_path}')
+
+        
+        print(f'File saved to: {self.current_file_path}')
+
+
+    # If using update button
+
+    # def update_file(self)->None:
+
+    #     if self.current_file_path is None:
+    #         return
+        
+    #     with open(self.current_file_path, 'w') as file:
+    #         file.write(self.text_area.get(1.0, tk.END))
+    #     print(f'File updated to: {self.current_file_path}')
 
 
     # 8. Creating a function to laod the content 
@@ -50,6 +82,7 @@ class SimpleNotepad(tk.Tk):
             self.text_area.delete(1.0, tk.END)
             self.text_area.insert(tk.INSERT, content)
 
+        self.current_file_path = file_path
         print(f'File loaded from: {file_path}')
 
 
