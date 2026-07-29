@@ -40,10 +40,13 @@ class SimpleNotepad(tk.Tk):
         # self.update_button.pack(side=tk.BOTTOM)
 
         # Autosave setup
-        self.current_file_path: str | None = None
+        # self.current_file_path: str | None = None
+        self.current_file_path: Path | None = None
         self.autosave_dir = Path.home() / ".simple_notepad"
         self.autosave_path = self.autosave_dir / "autosave.txt"
         self.autosave_dir.mkdir(parents=True, exist_ok=True)
+
+        self.update_title()
 
         # Load autosave on startup (recover unsaved work)
         if self.autosave_path.exists():
@@ -71,7 +74,8 @@ class SimpleNotepad(tk.Tk):
             with open(file_path, 'w') as file:
                 file.write(self.text_area.get(1.0, tk.END))
 
-            self.current_file_path = file_path
+            self.current_file_path = Path(file_path)
+            self.update_title()
             print(f'File saved to: {file_path}')
 
         with open(self.current_file_path, 'w') as file:
@@ -101,7 +105,8 @@ class SimpleNotepad(tk.Tk):
             self.text_area.delete(1.0, tk.END)
             self.text_area.insert(tk.INSERT, content)
 
-        self.current_file_path = file_path
+        self.current_file_path = Path(file_path)
+        self.update_title()
         print(f'File loaded from: {file_path}')
 
     # ---------- Auto-save ----------
@@ -129,6 +134,16 @@ class SimpleNotepad(tk.Tk):
                 pass
 
         self.schedule_auto_save()
+
+    def update_title(self) -> None:
+        base_title = "Shreyas's Notepad"
+        if self.current_file_path is None:
+            # No file yet (new/unsaved document)
+            self.title(f"Untitled - {base_title}")
+        else:
+            file_name = self.current_file_path.name  # if using Path
+            # or: file_name = os.path.basename(self.current_file_path) if it's a string
+            self.title(f"{file_name} - {base_title}")
 
 
 # 9. Main entry point of the script.
