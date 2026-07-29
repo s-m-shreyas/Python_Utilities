@@ -39,6 +39,7 @@ class SimpleNotepad(tk.Tk):
         #                                         command=self.update_file)
         # self.update_button.pack(side=tk.BOTTOM)
 
+
         # Autosave setup
         # self.current_file_path: str | None = None
         self.current_file_path: Path | None = None
@@ -46,6 +47,7 @@ class SimpleNotepad(tk.Tk):
         self.autosave_path = self.autosave_dir / "autosave.txt"
         self.autosave_dir.mkdir(parents=True, exist_ok=True)
 
+        # updating the title.
         self.update_title()
 
         # Load autosave on startup (recover unsaved work)
@@ -109,7 +111,8 @@ class SimpleNotepad(tk.Tk):
         self.update_title()
         print(f'File loaded from: {file_path}')
 
-    # ---------- Auto-save ----------
+
+    # 9. Auto-save 
 
     def schedule_auto_save(self) -> None:
         if self.auto_save_job is not None:
@@ -135,6 +138,9 @@ class SimpleNotepad(tk.Tk):
 
         self.schedule_auto_save()
 
+
+    # 10. updating title
+
     def update_title(self) -> None:
         base_title = "Shreyas's Notepad"
         if self.current_file_path is None:
@@ -146,7 +152,7 @@ class SimpleNotepad(tk.Tk):
             self.title(f"{file_name} - {base_title}")
 
 
-# 9. Main entry point of the script.
+# 11. Main entry point of the script.
 
 def main()->None:
     app: SimpleNotepad = SimpleNotepad()
