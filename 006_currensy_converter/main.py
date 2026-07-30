@@ -2,26 +2,28 @@ import requests
 import json
 
 
-def get_country_codes()->list[str]:
-    response = requests.get(url = fr"https://api.frankfurter.dev/v2/rates?base=USD")
+def get_country_codes()->list[dict[str, str]]|None:
+    response = requests.get(url = fr"https://api.frankfurter.dev/v2/currencies")
     text_response: str = response.text
     json_object = json.loads(text_response)
-    country_codes_available: list[str] | None = [dct['quote'] for dct in json_object]
-    return country_codes_available
+    # print(json_object)
+    return json_object
 
-
+    
 def fetch_currency_rate(base_currency: str,
                         date_: str, 
-                        quote_currency: str)->dict[str, str | float]|None:
+                        quote_currency: str)->tuple[dict[str, str|None], dict[str, str|None]]|None:
     
-    country_codes_list: list[str] = get_country_codes()
+    country_codes_list: list[dict[str, str]]|None = get_country_codes()
 
     try:
         response = requests.get(url = fr"https://api.frankfurter.dev/v2/rates?base={base_currency}&date={date_}")
         text_response: str = response.text
         json_object = json.loads(text_response)
+        # print(json_object)
 
         # country_codes_available: list[str] | None = [dct['quote'] for dct in json_object]
+        # print(len(country_codes_available))
 
     except Exception as e:
         print(f'Error: {e}')
@@ -30,14 +32,15 @@ def fetch_currency_rate(base_currency: str,
         main()
 
     else:
-        for dct in json_object:
+        for dct, dct2 in zip(json_object, country_codes_list):
             if quote_currency in dct.values():
                 print(f'Date: {dct['date']}')
                 print(f'Base Currency Code: {dct['base']}')
                 print(f'Target Currency Code: {dct['quote']}')
-                print(f'Base Currency Price: {dct['base']} 1/-')
-                print(f'Target Currency Price: {dct['quote']} {dct['rate']}/-')
-                return dct
+                # print(f'Base Currency Price: {} 1/-')
+                print(f'Target Currency Price: {dct2['symbol']} {dct['rate']}/-')
+                return (dct, dct2)
+                
             else:
                 pass
 
