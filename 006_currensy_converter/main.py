@@ -2,7 +2,6 @@ import requests
 import json
 
 
-
 def get_country_codes()->list[dict[str, str]]:
 
     response = requests.get(url = fr"https://api.frankfurter.dev/v2/currencies")
@@ -48,11 +47,9 @@ def fetch_currency_rate(base_currency: str,
             else:
                 pass
 
-
         print(f'{country_codes_list}')
         print(f'Please re-enter the details and use the quote currency code from the above given list.')
         main()
-
 
 
 def main()->None:
