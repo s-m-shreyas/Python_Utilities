@@ -32,6 +32,11 @@ def fetch_currency_rate(base_currency: str,
     else:
         for dct in json_object:
             if quote_currency in dct.values():
+                print(f'Date: {dct['date']}')
+                print(f'Base Currency Code: {dct['base']}')
+                print(f'Target Currency Code: {dct['quote']}')
+                print(f'Base Currency Price: {dct['base']} 1/-')
+                print(f'Target Currency Code: {dct['quote']} {dct['rate']}/-')
                 return dct
             else:
                 pass
@@ -45,8 +50,8 @@ def main()->None:
     base_currency: str = input('Please provide your base currency code >> ').upper()
     date_: str = input('Please provide the date [YYYY-MM-DD] of rate you want to check >> ')
     quote_currency: str = input('Please provide the currency you want to quote to >> ').upper()
-    fetched_currency_rate: dict[str, str | float] | None = fetch_currency_rate(base_currency, date_, quote_currency)
-    print(fetched_currency_rate)
+    fetch_currency_rate(base_currency, date_, quote_currency)
+    
 
 
 if __name__ == '__main__':
