@@ -36,7 +36,7 @@ def fetch_currency_rate(base_currency: str,
                 print(f'Base Currency Code: {dct['base']}')
                 print(f'Target Currency Code: {dct['quote']}')
                 print(f'Base Currency Price: {dct['base']} 1/-')
-                print(f'Target Currency Code: {dct['quote']} {dct['rate']}/-')
+                print(f'Target Currency Price: {dct['quote']} {dct['rate']}/-')
                 return dct
             else:
                 pass
@@ -50,7 +50,10 @@ def main()->None:
     base_currency: str = input('Please provide your base currency code >> ').upper()
     date_: str = input('Please provide the date [YYYY-MM-DD] of rate you want to check >> ')
     quote_currency: str = input('Please provide the currency you want to quote to >> ').upper()
-    fetch_currency_rate(base_currency, date_, quote_currency)
+    if base_currency != quote_currency:
+        fetch_currency_rate(base_currency, date_, quote_currency)
+    else:
+        print('Base currency code cannot be same as target currency price.')
     
 
 
