@@ -19,7 +19,7 @@ def get_last_modified_date(file_path: str) -> str:
     dt = datetime.fromtimestamp(mtime)
     return dt.strftime("%Y-%m-%d")  # e.g. "2023-12-15"
 
-def reg_ex(some_str: str, 
+def transform_data(some_str: str, 
            txt_path: str)->tuple[list[dict[str, str]] ,str]:
 
     result_list: list[dict[str, str]] = []
@@ -77,7 +77,7 @@ def text_parser(text_file_path: str,
                 csv_file_out_path: str)->None:
     with open(text_file_path, 'r', encoding='utf-8') as file:
         content: str = file.read()
-        load_as_csv: tuple[list[dict[str, str]] ,str]= reg_ex(content, text_file_path)
+        load_as_csv: tuple[list[dict[str, str]] ,str]= transform_data(content, text_file_path)
         write_to_csv(load_as_csv[0], csv_file_out_path, load_as_csv[1])
 
 
