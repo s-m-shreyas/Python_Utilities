@@ -20,16 +20,24 @@ def fetch_currency_rate(base_currency: str,
 
     try:
 
-        response = requests.get(url = fr"https://api.frankfurter.dev/v2/rates?base={base_currency}&date={date_}")
-        text_response: str = response.text
-        json_object: list[dict[str, str|float]]= json.loads(text_response)
+        response = requests.get(f"https://api.frankfurter.dev/v2/rates?base={base_currency}&date={date_}")
+        response.raise_for_status()   # <-- Raises HTTPError for 4xx/5xx
+        json_object = response.json()
+
+    except requests.exceptions.ConnectionError:
+        print("Unable to connect to the API. Check your internet connection or API URL.")
+
+    except requests.exceptions.HTTPError as e:
+        print("HTTP Error:", e)
+
+    except requests.exceptions.Timeout:
+        print("Request timed out.")
+
+    except requests.exceptions.RequestException as e:
+        print("Request failed:", e)
 
     except Exception as e:
-
-        print(f'Error: {e}')
-        print(country_codes_list)
-        print(f'Please re-enter a valid base currency code from the above list')
-        main()
+        print("Error:", e)
 
     else:
         for dct, dct2 in zip(json_object, country_codes_list):
@@ -49,7 +57,7 @@ def fetch_currency_rate(base_currency: str,
 
         print(f'{country_codes_list}')
         print(f'Please re-enter the details and use the quote currency code from the above given list.')
-        main()
+        # main()
 
 
 def main()->None:
