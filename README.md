@@ -1,4 +1,4 @@
-# Python Mini Projects
+# Python Utilities
 
 A collection of beginner-friendly Python mini projects, each contained in its own folder with a single `main.py` file. This repo is designed for practicing Python fundamentals and Git/GitHub workflows.
 
