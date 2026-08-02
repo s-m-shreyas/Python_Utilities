@@ -1,90 +1,96 @@
 # Python Utilities
 
-A collection of beginner-friendly Python mini projects, each contained in its own folder with a single `main.py` file. This repo is designed for practicing Python fundamentals and Git/GitHub workflows.
+A curated collection of reusable Python utilities and automation tools for data processing, file handling, text parsing, ETL, and productivity. This repository demonstrates practical Python programming through modular, real-world scripts that solve common automation and data engineering tasks.
 
-## Project List
+---
 
-- `001_income_calculator/main.py`
-- `002_expense_splitter/main.py`
-- `003_word_frequency_calculator/main.py`
-- `004_notepad/main.py`
-- `005_website_status_checker/main.py`
-- `006_currency_converter/main.py`
-- `007_zoom_chat_log_parser/main.py`
+## Repository Overview
 
-Each folder contains one executable script: `main.py`.
+Each utility is organized into its own directory and can be executed independently.
+
+| Project | Description |
+|---------|-------------|
+| 001 - Income Calculator | Calculates income, deductions, and net salary. |
+| 002 - Expense Splitter | Splits expenses among multiple users. |
+| 003 - Word Frequency Calculator | Analyzes text and calculates word frequencies. |
+| 004 - Notepad | Lightweight text editor built with Python. |
+| 005 - Website Status Checker | Checks website availability using HTTP requests. |
+| 006 - Currency Converter | Converts currencies using exchange rate APIs. |
+| 007 - Zoom Chat Log Parser | Parses unstructured Zoom chat logs into structured CSV datasets using Python and Regular Expressions. |
+
+---
+
+## Technologies
+
+- Python
+- Regular Expressions (Regex)
+- CSV
+- File Handling
+- JSON
+- HTTP Requests
+- APIs
+- Data Processing
+- ETL Concepts
+
+---
+
+## Repository Structure
+
+```text
+python-utilities/
+│
+├── 001_income_calculator/
+├── 002_expense_splitter/
+├── 003_word_frequency_calculator/
+├── 004_notepad/
+├── 005_website_status_checker/
+├── 006_currency_converter/
+├── 007_zoom_chat_log_parser/
+└── README.md
+```
+
+---
+
+## Getting Started
+
+### Clone the repository
+
+```bash
+git clone https://github.com/shreyas-global-7/python-utilities.git
+cd python-utilities
+```
+
+### Run any utility
+
+Navigate to the desired project directory.
+
+Example:
+
+```bash
+cd 007_zoom_chat_log_parser
+python main.py
+```
+
+---
 
 ## Requirements
 
-- Python 3.x
-- Git
-- (Optional) Visual Studio Code
+- Python 3.10+
+- pip
 
-Install any extra libraries used in individual projects (if required) with:
+Install dependencies (if applicable):
 
 ```bash
 pip install -r requirements.txt
 ```
 
-or install them manually as mentioned in comments/docstrings inside each `main.py`.
+Some utilities may require additional third-party libraries. Refer to the individual project documentation for project-specific dependencies.
 
-## How to Run a Project
+---
 
-1. Clone the repository:
+## Purpose
 
-   ```bash
-   git clone https://github.com/your-username/Python_Mini_Projects.git
-   cd Python_Mini_Projects
-   ```
+This repository serves as a collection of reusable Python utilities developed for learning, automation, and practical problem solving. It focuses on writing clean, modular, and maintainable Python code while demonstrating concepts commonly used in software engineering and data engineering workflows.
 
-2. Change into the project folder you want to run, for example:
+---
 
-   ```bash
-   cd 001_income_calculator
-   ```
-
-3. Run the `main.py` file:
-
-   ```bash
-   python main.py
-   ```
-
-   or on some systems:
-
-   ```bash
-   python3 main.py
-   ```
-
-## Folder Structure
-
-```bash
-Python_Mini_Projects/
-├── 001_income_calculator/
-│   └── main.py
-├── 002_expense_splitter/
-│   └── main.py
-├── 003_word_frequency_calculator/
-│   └── main.py
-├── 004_notepad/
-│   └── main.py
-├── 005_website_status_checker/
-│   └── main.py
-├── 006_currency_converter/
-│   └── main.py
-├── 007_zoom_chat_log_parser/
-│   └── main.py
-└── README.md
-```
-
-## Learning Focus
-
-These mini projects help you practice:
-
-- Writing small, complete Python scripts
-- Organizing code in separate folders
-- Running and debugging scripts from the command line or VS Code
-- Using Git and GitHub for version control
-
-## Contributing
-
-Suggestions, improvements, and new mini projects are welcome. Fork the repo, create a new folder with a `main.py`, and open a pull request.
