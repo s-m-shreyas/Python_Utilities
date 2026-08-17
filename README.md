@@ -56,7 +56,7 @@ python-utilities/
 ### Clone the repository
 
 ```bash
-git clone https://github.com/shreyas-global-7/python-utilities.git
+git clone https://github.com/s-m-shreyas/python-utilities.git
 cd python-utilities
 ```
 
